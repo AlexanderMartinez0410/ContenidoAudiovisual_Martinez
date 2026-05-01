@@ -17,10 +17,18 @@ public class PruebaAudioVisual {
         Documental documental = new Documental("Cosmos", 45, "Science", "Astronomy");
         documental.setInvestigador(new Investigador("Carl", "Sagan"));
 
-        ContenidoAudiovisual[] contenidos = new ContenidoAudiovisual[3];
+        Webinar webinar = new Webinar("Java Avanzado", 90, "Educación", new Investigador("Dr. Java", "Software Architecture"), 2, "2026-06-15");
+        webinar.registrarAsistente(); // Quedan 1
+
+        AnuncioPublicitario anuncio = new AnuncioPublicitario("Super Promo", 1, "Comercial", "TechCorp", 5000.0, "Jóvenes");
+
+        ContenidoAudiovisual[] contenidos = new ContenidoAudiovisual[5];
         contenidos[0] = pelicula;
         contenidos[1] = serie;
         contenidos[2] = documental;
+        contenidos[3] = webinar;
+        contenidos[4] = anuncio;
+
 
 
         // Mostrar los detalles de cada contenido audiovisual
