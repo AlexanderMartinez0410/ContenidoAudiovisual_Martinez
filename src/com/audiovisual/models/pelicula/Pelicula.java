@@ -1,6 +1,7 @@
 package com.audiovisual.models.pelicula;
 
 import com.audiovisual.core.ContenidoAudiovisual;
+import com.audiovisual.models.actor.Actor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,9 @@ public class Pelicula extends ContenidoAudiovisual {
         this.estudio = estudio;
         this.actores = new ArrayList<>();
     }
+
+    public String getEstudio() { return estudio; }
+    public void setEstudio(String estudio) { this.estudio = estudio; }
 
     public void agregarActor(Actor actor) { actores.add(actor); }
 

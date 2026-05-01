@@ -1,6 +1,7 @@
 package com.audiovisual.models.serietv;
 
 import com.audiovisual.core.ContenidoAudiovisual;
+import com.audiovisual.models.temporada.Temporada;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class SerieDeTV extends ContenidoAudiovisual {
     }
 
     public void agregarTemporada(Temporada temporada) { temporadas.add(temporada); }
+    public List<Temporada> getTemporadas() { return temporadas; }
 
     @Override
     public void mostrarDetalles() {

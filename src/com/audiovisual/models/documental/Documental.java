@@ -1,6 +1,7 @@
 package com.audiovisual.models.documental;
 
 import com.audiovisual.core.ContenidoAudiovisual;
+import com.audiovisual.models.investigador.Investigador;
 
 public class Documental extends ContenidoAudiovisual {
     private String tema;
@@ -10,6 +11,9 @@ public class Documental extends ContenidoAudiovisual {
         super(titulo, duracionEnMinutos, genero);
         this.tema = tema;
     }
+
+    public String getTema() { return tema; }
+    public void setTema(String tema) { this.tema = tema; }
 
     public void setInvestigador(Investigador investigador) { this.investigador = investigador; }
 

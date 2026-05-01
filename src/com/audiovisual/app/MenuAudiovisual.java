@@ -4,8 +4,11 @@ import com.audiovisual.core.ContenidoAudiovisual;
 import com.audiovisual.models.pelicula.*;
 import com.audiovisual.models.serietv.*;
 import com.audiovisual.models.documental.*;
-import com.audiovisual.models.webinar.Webinar;
-import com.audiovisual.models.anuncio.AnuncioPublicitario;
+import com.audiovisual.models.webinar.*;
+import com.audiovisual.models.anuncio.*;
+import com.audiovisual.models.actor.Actor;
+import com.audiovisual.models.temporada.Temporada;
+import com.audiovisual.models.investigador.Investigador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +63,7 @@ public class MenuAudiovisual {
         contenidos.add(w);
 
         AnuncioPublicitario a = new AnuncioPublicitario("Coca-Cola Refresh", 1, "Comercial", "Coca-Cola Co.", 100000.0, "Global");
+        a.agregarActor(new Actor("Lionel", "Messi"));
         contenidos.add(a);
     }
 
@@ -128,50 +132,13 @@ public class MenuAudiovisual {
     }
 
     private static void menuCrear(int tipo) {
-        try {
-            System.out.print("Título: ");
-            String titulo = scanner.nextLine();
-            System.out.print("Duración (min): ");
-            int duracion = Integer.parseInt(scanner.nextLine());
-            System.out.print("Género: ");
-            String genero = scanner.nextLine();
-
-            switch (tipo) {
-                case 1 -> {
-                    System.out.print("Estudio: ");
-                    String estudio = scanner.nextLine();
-                    contenidos.add(new Pelicula(titulo, duracion, genero, estudio));
-                }
-                case 2 -> contenidos.add(new SerieDeTV(titulo, duracion, genero));
-                case 3 -> {
-                    System.out.print("Tema: ");
-                    String tema = scanner.nextLine();
-                    contenidos.add(new Documental(titulo, duracion, genero, tema));
-                }
-                case 4 -> {
-                    System.out.print("Conferencista: ");
-                    String conf = scanner.nextLine();
-                    System.out.print("Especialidad: ");
-                    String esp = scanner.nextLine();
-                    System.out.print("Cupos: ");
-                    int cupos = Integer.parseInt(scanner.nextLine());
-                    System.out.print("Fecha: ");
-                    String fecha = scanner.nextLine();
-                    contenidos.add(new Webinar(titulo, duracion, genero, new Investigador(conf, esp), cupos, fecha));
-                }
-                case 5 -> {
-                    System.out.print("Cliente: ");
-                    String cliente = scanner.nextLine();
-                    System.out.print("Presupuesto: ");
-                    double pre = Double.parseDouble(scanner.nextLine());
-                    System.out.print("Público: ");
-                    String pub = scanner.nextLine();
-                    contenidos.add(new AnuncioPublicitario(titulo, duracion, genero, cliente, pre, pub));
-                }
-            }
-            System.out.println("¡Creado con éxito!");
-        } catch (Exception e) {
-            System.out.println("Error al crear. Revise los datos.");
+        switch (tipo) {
+            case 1 -> PeliculaManager.crear(contenidos, scanner);
+            case 2 -> SerieTVManager.crear(contenidos, scanner);
+            case 3 -> DocumentalManager.crear(contenidos, scanner);
+            case 4 -> WebinarManager.crear(contenidos, scanner);
+            case 5 -> AnuncioManager.crear(contenidos, scanner);
+            default -> System.out.println("Tipo no válido.");
         }
     }
 
@@ -184,9 +151,22 @@ public class MenuAudiovisual {
                 System.out.print("Nuevo Título (enter para omitir): ");
                 String nt = scanner.nextLine();
                 if (!nt.isBlank()) c.setTitulo(nt);
+                
                 System.out.print("Nuevo Género (enter para omitir): ");
                 String ng = scanner.nextLine();
                 if (!ng.isBlank()) c.setGenero(ng);
+
+                System.out.print("Nueva Duración (enter para omitir): ");
+                String nd = scanner.nextLine();
+                if (!nd.isBlank()) c.setDuracionEnMinutos(Integer.parseInt(nd));
+
+                // Delegar edición específica según el tipo
+                if (c instanceof Pelicula p) PeliculaManager.editar(p, scanner);
+                else if (c instanceof Documental d) DocumentalManager.editar(d, scanner);
+                else if (c instanceof Webinar w) WebinarManager.editar(w, scanner);
+                else if (c instanceof AnuncioPublicitario a) AnuncioManager.editar(a, scanner);
+                else if (c instanceof SerieDeTV s) SerieTVManager.editar(s, scanner);
+
                 System.out.println("Editado con éxito.");
             } else {
                 System.out.println("ID no encontrado.");

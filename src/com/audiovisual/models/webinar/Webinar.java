@@ -1,7 +1,7 @@
 package com.audiovisual.models.webinar;
 
 import com.audiovisual.core.ContenidoAudiovisual;
-import com.audiovisual.models.documental.Investigador;
+import com.audiovisual.models.investigador.Investigador;
 
 public class Webinar extends ContenidoAudiovisual {
     private Investigador conferencista;
@@ -14,6 +14,9 @@ public class Webinar extends ContenidoAudiovisual {
         this.cuposDisponibles = cuposDisponibles;
         this.fechaProgramada = fechaProgramada;
     }
+
+    public String getFechaProgramada() { return fechaProgramada; }
+    public void setFechaProgramada(String fechaProgramada) { this.fechaProgramada = fechaProgramada; }
 
     public void registrarAsistente() {
         if (cuposDisponibles > 0) {
