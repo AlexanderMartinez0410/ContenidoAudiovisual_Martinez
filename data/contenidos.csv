@@ -1,0 +1,7 @@
+id;tipo;titulo;duracion;genero;extra1;extra2;extra3;subElementos
+0;PELICULA;Avatar;162;Acción;Lightstorm;;;Sam:Worthington
+1;SERIETV;Breaking Bad;45;Drama;;;;1:7
+2;DOCUMENTAL;Nuestro Planeta;50;Naturaleza;Vida Silvestre;David:Attenborough;;
+3;WEBINAR;Java para Expertos;120;Educación;Dr. James:Arquitectura;50;2026-07-20;
+4;ANUNCIO;Coca-Cola Refresh;1;Comercial;Coca-Cola Co.;100000.0;Global;Lionel:Messi
+5;PELICULA;As;30;as;dsa;;;
