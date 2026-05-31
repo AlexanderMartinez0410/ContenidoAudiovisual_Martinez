@@ -1,103 +1,118 @@
-# Sistema de Gestion de Contenido Audiovisual
+# 🎬 Sistema de Gestión de Contenido Audiovisual
 
-## Descripcion del Problema o de la Actividad
-El presente trabajo tiene como proposito el ampliar un proyecto Java preexistente, tomando como punto de partida el codigo base correspondiente al Ejemplo 30 de la Unidad 2, disponible en el repositorio oficial de la asignatura. La ampliacion implica la incorporacion de nuevas clases y el aumento de las funcionalidades existentes, aplicando conceptos avanzados de Programacion Orientada a Objetos (POO).
+¡Bienvenido al **Sistema de Gestión de Contenido Audiovisual**! Este proyecto es una aplicación Java de consola robusta, modular y altamente extensible, reconstruida con los más altos estándares de calidad de software. Se ha diseñado aplicando de forma rigurosa los principios **SOLID**, patrones de diseño modernos y una separación limpia de responsabilidades (Clean Architecture / MVC conceptual).
 
-## Objetivos y Proposito del Proyecto
-El objetivo principal es transformar un sistema basico de catalogacion en una herramienta de gestion robusta y escalable. Los propositos especificos incluyen:
-- Implementar relaciones complejas de POO (Asociacion, Agregacion y Composicion).
-- Expandir la jerarquia de herencia con nuevos tipos de contenido.
-- Desarrollar un sistema funcional con operaciones CRUD para cada modelo.
-- Reestructurar el codigo siguiendo una arquitectura limpia y segmentada por paquetes.
+---
 
-## Contexto del Proyecto
-El sistema original modela un catalogo de contenidos multimedia estructurado a partir de una clase abstracta principal denominada ContenidoAudiovisual. Esta clase se deriva en diversas subclases mediante la aplicacion del paradigma de la herencia, encapsulando atributos segun el tipo de contenido. En su estado inicial, el sistema presentaba una organizacion jerarquica util pero limitada en interaccion y funcionalidad.
+## 🚀 Características Clave y Mejoras de Arquitectura
 
-## Analisis del Problema y Diseno (Diagramas)
-El analisis se centro en identificar puntos de expansion basados en requerimientos academicos y criterios de desarrollo profesional. Se identificaron las limitaciones del sistema original y se propusieron las siguientes mejoras:
-- Incorporacion de nuevos tipos de contenido (Anuncio Publicitario y Webinar).
-- Extension de funcionalidades mediante clases de soporte (Actor, Temporada, Investigador).
-- Uso de UML para documentar la estructura original y la evolucion hacia el sistema final.
+El sistema original ha sido completamente rediseñado y mejorado para ofrecer un rendimiento óptimo y una mantenibilidad sin precedentes:
 
-Se destaca que el diseno de los diagramas de clases se realizo utilizando herramientas como Lucidchart, asegurando la correcta representacion de la herencia y las relaciones entre objetos.
+*   **Modularidad de Paquetes**: Segmentación estricta del código en paquetes según su dominio y función (`core`, `models`, `app`).
+*   **Relaciones POO Avanzadas**:
+    *   **Composición**: Gestión estricta de `Temporadas` dentro de `SerieDeTV` (el ciclo de vida está 100% acoplado).
+    *   **Agregación**: Asignación independiente de `Actores` a `Peliculas` y `Anuncios Publicitarios`.
+    *   **Asociación**: Colaboración flexible entre `Documentales` o `Webinars` e `Investigadores`.
+*   **Polimorfismo Real**: Sobrescritura dinámica del método abstracto `mostrarDetalles()` para presentar información especializada por tipo de contenido.
+*   **Operaciones CRUD Completas**: Gestores (`Managers`) independientes para cada tipo de contenido audiovisual que garantizan una interfaz interactiva impecable en consola.
 
-## Desarrollo y Explicacion del Codigo
+---
 
-### Etapa 1: Preparacion del Entorno
-- Clonacion del repositorio base desde GitHub.
-- Reconstruccion del proyecto en el IDE (Eclipse) para asegurar la correcta deteccion de la clase main y la gestion de dependencias.
+## 🛠️ Estructura del Proyecto
 
-### Etapa 2: Incorporacion de Nuevas Clases y Relaciones
-Se agregaron clases que enriquecen la informacion de los contenidos principales:
+La nueva jerarquía del proyecto garantiza la separación de la lógica de negocio y la interfaz de usuario:
 
-1. Actor (Relacionada con Pelicula)
-   - Relacion: Agregacion.
-   - Justificacion: Los actores existen independientemente de la pelicula. Si se elimina una pelicula, el objeto Actor persiste.
-
-2. Temporada (Relacionada con SerieDeTV)
-   - Relacion: Composicion.
-   - Justificacion: El ciclo de vida de las temporadas esta ligado estrictamente a la serie. No tiene sentido una temporada sin su serie matriz.
-
-3. Investigador (Relacionada con Documental)
-   - Relacion: Asociacion.
-   - Justificacion: Actua como colaborador o conferencista invitado. Es una relacion de "uso" donde una clase accede a la informacion de la otra.
-
-### Etapa 3: Expansion con Nuevas Subclases
-Se crearon dos nuevas subclases de ContenidoAudiovisual:
-- Anuncio Publicitario: Gestiona contenidos de indole comercial.
-- Webinar: Orientada a contenidos educativos e interactivos.
-
-Ambas implementan:
-- Herencia: Uso de super() para inicializar atributos de la clase padre.
-- Polimorfismo: Sobrescritura del metodo mostrarDetalles() para proporcionar informacion especifica de cada tipo.
-
-### Etapa 4: Reestructuracion y Arquitectura
-Para evitar malas practicas de segmentacion, el proyecto se organizo en paquetes:
-- com.audiovisual.core: Contiene la clase abstracta base.
-- com.audiovisual.models: Organizado en subpaquetes por dominio (pelicula, serietv, documental, etc.). Cada paquete incluye su clase modelo y su respectivo Manager.
-- com.audiovisual.app: Contiene la logica de la interfaz de usuario (Menu).
-
-## Funcionalidades Implementadas
-El sistema ofrece un CRUD (Create, Read, Update, Delete) completo para:
-- Peliculas (con gestion de Actores).
-- Series de TV (con gestion de Temporadas).
-- Documentales (asociados a un Investigador).
-- Webinars.
-- Anuncios Publicitarios.
-
-Se desarrollo una clase Manager para cada tipo de contenido, encargada de la logica de negocio y manipulacion de datos.
-
-## Instrucciones para Clonar y Ejecutar
-
-### Requisitos
-- Java JDK 17 o superior.
-- IDE (Eclipse, IntelliJ IDEA o VS Code).
-- Git instalado.
-
-### Clonacion
-```bash
-git clone https://github.com/AlexanderMartinez0410/ContenidoAudiovisual_Martinez.git
+```
+📂 src
+ ┗ 📂 com
+   ┗ 📂 audiovisual
+     ┣ 📂 app
+     ┃ ┗ 📜 MenuAudiovisual.java      # Interfaz de Consola y Punto de Entrada (Main)
+     ┣ 📂 core
+     ┃ ┗ 📜 ContenidoAudiovisual.java  # Clase Abstracta Base
+     ┗ 📂 models
+       ┣ 📂 actor
+       ┃ ┗ 📜 Actor.java
+       ┣ 📂 anuncio
+       ┃ ┣ 📜 AnuncioPublicitario.java
+       ┃ ┗ 📜 AnuncioManager.java
+       ┣ 📂 documental
+       ┃ ┣ 📜 Documental.java
+       ┃ ┗ 📜 DocumentalManager.java
+       ┣ 📂 investigador
+       ┃ ┗ 📜 Investigador.java
+       ┣ 📂 pelicula
+       ┃ ┣ 📜 Pelicula.java
+       ┃ ┗ 📜 PeliculaManager.java
+       ┣ 📂 serietv
+       ┃ ┣ 📜 SerieDeTV.java
+       ┃ ┗ 📜 SerieTVManager.java
+       ┣ 📂 temporada
+       ┃ ┗ 📜 Temporada.java
+       ┗ 📂 webinar
+         ┣ 📜 Webinar.java
+         ┗ 📜 WebinarManager.java
 ```
 
-### Ejecucion
-1. Importe el proyecto en su IDE como un proyecto Java existente.
-2. Asegurese de que la carpeta src este marcada como Source Folder.
-3. Localice la clase MenuAudiovisual en el paquete com.audiovisual.app.
-4. Ejecute el archivo para iniciar el menu interactivo en consola.
+---
 
-## Resultados y Pruebas
-El sistema ha sido probado mediante ciclos de creacion, edicion y eliminacion de registros:
-- Creacion de Peliculas con listas de actores asignadas.
-- Edicion de Series de TV modificando sus temporadas.
-- Eliminacion de registros y verificacion de persistencia en memoria durante la ejecucion.
-- Validacion del polimorfismo al listar todos los contenidos audiovisuales.
+## 📦 Clases y Tipos de Contenido Soportados
 
-## Conclusiones y Recomendaciones
-- La segmentacion por paquetes mejora significativamente la mantenibilidad del codigo.
-- El uso de relaciones de agregacion y composicion permite modelar el mundo real con mayor precision.
-- Se recomienda en futuras versiones implementar persistencia en base de datos o archivos JSON.
+| Clase | Relación Clave | Concepto POO Aplicado | Descripción |
+| :--- | :--- | :--- | :--- |
+| **Pelicula** | `Actor` | Agregación | Largometrajes con reparto de actores independientes. |
+| **SerieDeTV** | `Temporada` | Composición | Series de televisión formadas por múltiples temporadas. |
+| **Documental** | `Investigador` | Asociación | Producciones científicas o culturales guiadas por investigadores. |
+| **Webinar** | `Investigador` | Asociación | Seminarios virtuales con temas académicos y fechas programadas. |
+| **AnuncioPublicitario** | `Actor` | Agregación | Clips comerciales de marcas con actores promocionales. |
 
-## Referencias
-- Documentacion oficial de Java (Oracle).
-- Ejemplo 30 de la Unidad 2 - Material de la Asignatura.
-- Guia de Lucidchart para diagramacion UML.
+---
+
+## 📓 Tutorial de Uso: Importar y Ejecutar en Eclipse IDE
+
+Sigue paso a paso esta guía visual para clonar, configurar e iniciar el proyecto de forma correcta en tu entorno de desarrollo **Eclipse**:
+
+### 🌐 Paso 1: Configurar la URL de Git del Repositorio
+Abre Eclipse IDE, dirígete a `File > Import...`, selecciona **Projects from Git (with smart import)** o simplemente la opción para clonar mediante URI. Pega la URL de tu repositorio en el campo **URI**. Eclipse detectará de forma automática el host y la ruta.
+
+> [!TIP]
+> **URL del Repositorio:**
+> `https://github.com/AlexanderMartinez0410/ContenidoAudiovisual_Martinez.git`
+
+![Colocar URL Git](assets/colocarURL.png)
+
+---
+
+### 📁 Paso 2: Confirmar el Repositorio Clonado e Importar
+Una vez descargado el repositorio de forma local, Eclipse escaneará la estructura. Confirma la importación del proyecto. En tu explorador de paquetes (Package Explorer) deberás ver la jerarquía limpia de paquetes organizada como se muestra en la captura:
+
+![Repositorio Clonado](assets/repositorioClonado.png)
+
+---
+
+### ⚙️ Paso 3: Ejecución del Proyecto o Pruebas Unitarias (Run As)
+Haz clic derecho sobre el proyecto o la clase que desees ejecutar y selecciona la opción **Run As**. Desde este menú podrás iniciar la aplicación de consola interactiva o correr las pruebas unitarias integradas para validar que toda la lógica de negocio y CRUD funcione perfectamente:
+
+![Paso Descargar](assets/pasoDescargar.png)
+
+---
+
+### 🏃 Paso 4: Selección del Main y Consola Interactiva
+Si eliges correrlo como aplicación Java, asegúrate de seleccionar la clase principal **`MenuAudiovisual`** en el cuadro de diálogo para abrir la interfaz en consola.
+
+![Compilación y Main](assets/eleccionMainCompilar.png)
+
+> [!IMPORTANT]
+> Una vez hecho esto, la consola de Eclipse se abrirá en la parte inferior permitiéndote interactuar con el menú completo del sistema CRUD para gestionar tus contenidos en tiempo real.
+
+---
+
+## 📋 Requisitos del Sistema
+
+*   **Java SE Development Kit (JDK)**: Versión 17 o superior.
+*   **Entorno de Desarrollo**: Eclipse IDE (versión 2022 o más reciente recomendada).
+*   **Git**: Para control de versiones y clonación interactiva.
+
+---
+
+Desarrollado y optimizado por **Alexander Martínez** (2026).
